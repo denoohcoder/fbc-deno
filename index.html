@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#21418c">
+  <meta name="description" content="An independent, non-functional FBC Bank Zimbabwe design demo. No applications or personal information are submitted.">
+  <title>FBC Bank | Independent Design Demo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #21418c;
+      --blue-dark: #17336f;
+      --ink: #333333;
+      --muted: #657187;
+      --line: #e3e8f0;
+      --pale: #f3f6fb;
+      --white: #fff;
+      --green: #63b58a;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--white); line-height: 1.55; }
+    a { color: inherit; }
+    .demo-banner { padding: 11px 20px; color: #fff; background: #8b2f24; text-align: center; font-size: .88rem; font-weight: 750; letter-spacing: .01em; }
+    .demo-banner strong { text-transform: uppercase; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    header { border-bottom: 1px solid var(--line); background: #fff; }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; color: var(--blue); font-size: 1.35rem; font-weight: 850; letter-spacing: .025em; }
+    .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px 12px 12px 3px; background: var(--blue); color: #fff; font-weight: 900; }
+    .nav-note { font-size: .88rem; color: var(--muted); }
+    main { overflow: hidden; }
+    .hero { position: relative; padding: 76px 0 70px; background: linear-gradient(115deg, #f3f6fb 0%, #fff 64%); }
+    .hero::after { content: ""; position: absolute; width: 390px; height: 390px; right: -120px; top: -160px; border: 60px solid rgba(33,65,140,.055); border-radius: 50%; pointer-events: none; }
+    .hero-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 56px; align-items: center; position: relative; z-index: 1; }
+    .eyebrow { color: var(--blue); font-size: .78rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { max-width: 650px; margin: 14px 0 18px; color: var(--blue-dark); font-size: clamp(2.6rem, 5vw, 4.65rem); line-height: 1.04; letter-spacing: -.055em; }
+    .hero p { max-width: 580px; color: var(--muted); font-size: 1.12rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; padding: 0 20px; border: 1px solid var(--blue); border-radius: 7px; color: var(--white); background: var(--blue); font-weight: 750; text-decoration: none; }
+    .button.secondary { color: var(--blue); background: transparent; }
+    .card { padding: 28px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: 0 18px 50px rgba(28,48,88,.09); }
+    .card h2 { margin: 0 0 8px; color: var(--blue-dark); font-size: 1.35rem; }
+    .card-intro { margin: 0 0 22px; color: var(--muted); font-size: .91rem; }
+    label { display: block; margin: 15px 0 6px; font-size: .88rem; font-weight: 750; }
+    .field { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid #ccd4e0; border-radius: 7px; background: #fff; color: var(--ink); font: inherit; }
+    .field:focus { outline: 3px solid rgba(33,65,140,.17); border-color: var(--blue); }
+    .estimate { margin-top: 18px; padding: 16px; border-radius: 9px; background: var(--pale); }
+    .estimate small { color: var(--muted); }
+    .estimate output { display: block; margin-top: 3px; color: var(--blue); font-size: 1.65rem; font-weight: 850; }
+    .local-note { margin: 14px 0 0; color: var(--muted); font-size: .78rem; }
+    .features { padding: 65px 0; }
+    .section-heading { max-width: 650px; margin-bottom: 28px; }
+    .section-heading h2 { margin: 8px 0; color: var(--blue-dark); font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -.035em; }
+    .section-heading p { color: var(--muted); }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature { padding: 22px; border: 1px solid var(--line); border-radius: 12px; }
+    .feature-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 10px; background: #edf2fb; color: var(--blue); font-weight: 900; }
+    .feature h3 { margin: 13px 0 6px; color: var(--blue-dark); font-size: 1.05rem; }
+    .feature p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .notice { margin: 0 auto 60px; padding: 20px 22px; border-left: 4px solid #d88a37; border-radius: 5px; background: #fff8ef; color: #57442e; }
+    .notice strong { display: block; margin-bottom: 4px; }
+    footer { padding: 25px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .hero { padding: 52px 0; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .nav-note { max-width: 150px; text-align: right; }
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner"><strong>Unofficial design demo</strong> — Not affiliated with FBC Bank. Do not enter personal or banking information.</div>
+  <header>
+    <div class="container nav">
+      <div class="brand" aria-label="FBC Bank visual design concept"><span class="brand-mark" aria-hidden="true">F</span><span>FBC BANK <span style="font-weight:550">| ZIMBABWE</span></span></div>
+      <span class="nav-note">Independent visual concept · Not an official bank website</span>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Personal finance · concept page</div>
+          <h1>Plan your next step with confidence.</h1>
+          <p>A non-functional design concept for a personal-loan information page, styled with a professional blue-and-white palette. This demo does not represent an actual FBC Bank product or offer.</p>
+          <div class="actions"><a class="button" href="#estimator">Explore the sample estimator</a><a class="button secondary" href="#about">About this demo</a></div>
+        </div>
+        <aside class="card" id="estimator" aria-labelledby="estimator-title">
+          <h2 id="estimator-title">Sample repayment estimator</h2>
+          <p class="card-intro">A local illustration only—not a quote, approval, or bank offer.</p>
+          <label for="amount">Illustrative loan amount (USD)</label>
+          <input class="field" id="amount" type="number" min="100" max="100000" step="100" value="5000">
+          <label for="months">Illustrative repayment term</label>
+          <select class="field" id="months"><option value="6">6 months</option><option value="12" selected>12 months</option><option value="24">24 months</option><option value="36">36 months</option></select>
+          <div class="estimate"><small>Estimated monthly payment · example rate 18% p.a.</small><output id="payment" for="amount months">$458.40</output></div>
+          <p class="local-note">Calculation runs in your browser only. Nothing is sent or saved. Real rates and terms may differ; contact the bank through its official channels for verified information.</p>
+        </aside>
+      </div>
+    </section>
+    <section class="features container" id="about">
+      <div class="section-heading"><div class="eyebrow">Simple by design</div><h2>A finance experience concept built around clarity.</h2><p>These sample content blocks demonstrate a possible layout. They are illustrative and do not describe verified FBC Bank services.</p></div>
+      <div class="feature-grid">
+        <article class="feature"><span class="feature-icon" aria-hidden="true">01</span><h3>Understand the numbers</h3><p>Use a transparent example to see how loan amount and term can affect a monthly repayment estimate.</p></article>
+        <article class="feature"><span class="feature-icon" aria-hidden="true">02</span><h3>Review the details</h3><p>Before making a financial decision, verify rates, eligibility, fees, and terms directly with the lender.</p></article>
+        <article class="feature"><span class="feature-icon" aria-hidden="true">03</span><h3>Stay in control</h3><p>This prototype has no sign-in, application, contact, or payment flow, and does not request personal data.</p></article>
+      </div>
+    </section>
+    <div class="container"><aside class="notice"><strong>Important: this is not an official FBC Bank website.</strong>This independent front-end design demo is not endorsed by, connected with, or operated by FBC Bank Zimbabwe. It cannot accept loan applications, verify identity, or provide banking services. For authentic information, visit FBC Bank using a trusted official source.</aside></div>
+  </main>
+  <footer><div class="container footer-row"><span>Independent design concept · For demonstration only</span><span>No personal data collected or transmitted</span></div></footer>
+  <script>
+    const amount = document.getElementById('amount');
+    const months = document.getElementById('months');
+    const payment = document.getElementById('payment');
+    function updateEstimate() {
+      const principal = Number(amount.value);
+      const term = Number(months.value);
+      const monthlyRate = 0.18 / 12;
+      if (!Number.isFinite(principal) || principal <= 0 || !term) {
+        payment.textContent = 'Enter a valid amount';
+        return;
+      }
+      const monthly = principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -term));
+      payment.textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(monthly);
+    }
+    amount.addEventListener('input', updateEstimate);
+    months.addEventListener('change', updateEstimate);
+    updateEstimate();
+  </script>
+</body>
+</html>
